@@ -53,6 +53,10 @@ cap = cv2.VideoCapture(0)
 while True:
   success, img = cap.read()
 
+  if not success:
+    print("couldn't grab the frame")
+    break
+
   optimized_img = cv2.resize(
     img,
     (0,0),
@@ -110,4 +114,6 @@ while True:
       markAttendance(name)
 
   cv2.imshow('Webcam', img)
-  cv2.waitKey(1)
+  
+  if cv2.waitKey(1) == ord('q'):
+    break
