@@ -35,17 +35,20 @@ def markAttendance(name):
   file_path = 'resources/src/attendance.csv'
 
   with open(file_path, 'r+') as f:
-    myDataList  = f.readlines()
-    nameList    = []
+    data  = f.readlines()
 
-    for line in myDataList:
+    appointedDays = []
+
+    for line in data:
       entry = line.split(',')
-      nameList.append(entry[0])
 
-    if name not in nameList:
-      now = datetime.now()
-      dtString = now.strftime('%H:%M:%S')
-      f.writelines(f'\n{name}, {dtString}')
+      if entry[0] == name:
+        appointedDays.append(entry[1].rstrip('\n'))
+
+    today = datetime.now().strftime('%m/%d/%Y')
+
+    if today not in appointedDays:
+      f.writelines(f'\n{name},{today}')
 
 encodeListKnown = findEncodings(images)
 
@@ -77,11 +80,11 @@ while True:
     # prints the array with the distances between each 'known face' and the frame that is currently being processed
     print(faceDist)
 
-    matchIndex  = np.argmin(faceDist) # lowest value means best match
+    matchIndex  = np.argmin(faceDist) # grabs lowest value (means best match)
  
     if matches[matchIndex]:
       name = classNames[matchIndex].upper()
-      print(name)
+      print(name) # prints who was the best match
       y1, x2, y2, x1 = faceLoc
 
       # in order to 'revive' the image that was rescaled to .25 we can multiply it by 4
