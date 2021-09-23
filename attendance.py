@@ -47,7 +47,7 @@ def markAttendance(name):
       f.writelines(f'\n{name}, {dtString}')
 
 encodeListKnown = findEncodings(images)
- 
+
 cap = cv2.VideoCapture(0)
  
 while True:
