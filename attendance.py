@@ -11,6 +11,7 @@ classNames  = []
 
 knownFacesList = os.listdir(known_faces)
 
+# prints all known faces at the start
 print(knownFacesList)
 
 for knownFace in knownFacesList:
@@ -73,6 +74,7 @@ while True:
     matches     = face_recognition.compare_faces(encodeListKnown, encodeFace)
     faceDist    = face_recognition.face_distance(encodeListKnown, encodeFace)
 
+    # prints the array with the distances between each 'known face' and the frame that is currently being processed
     print(faceDist)
 
     matchIndex  = np.argmin(faceDist) # lowest value means best match
