@@ -9,3 +9,5 @@ Well, first u need to register some "faces" using the register.py script. Then y
 capturing frames.
 
 It'll log all attendances inside attendance.csv file.
+
+teste
