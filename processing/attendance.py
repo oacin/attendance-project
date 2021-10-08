@@ -12,7 +12,7 @@ classNames  = []
 knownFacesList = os.listdir(known_faces)
 
 # prints all known faces at the start
-print(knownFacesList)
+# print(knownFacesList)
 
 for knownFace in knownFacesList:
   currImg = cv2.imread(f'{known_faces}/{knownFace}')
@@ -78,13 +78,14 @@ while True:
     faceDist    = face_recognition.face_distance(encodeListKnown, encodeFace)
 
     # prints the array with the distances between each 'known face' and the frame that is currently being processed
-    print(faceDist)
+    # print(faceDist)
 
     matchIndex  = np.argmin(faceDist) # grabs lowest value (means best match)
  
     if matches[matchIndex]:
       name = classNames[matchIndex].upper()
-      print(name) # prints who was the best match
+      # prints who was the best match
+      # print(name)
       y1, x2, y2, x1 = faceLoc
 
       # in order to 'revive' the image that was rescaled to .25 we can multiply it by 4
