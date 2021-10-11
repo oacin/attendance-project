@@ -23,5 +23,7 @@ if personName:
 
       print('photo saved')
 
+      break
+
     elif pressedKey == ord('q'):
       break
