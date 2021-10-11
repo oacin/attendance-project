@@ -1,28 +1,27 @@
 def registrar(personName):
   import cv2
 
-  if personName:
-    cap = cv2.VideoCapture(0)
+  cap = cv2.VideoCapture(0)
 
-    while True:
-      success, img = cap.read()
+  while True:
+    success, img = cap.read()
 
-      if not success:
-        print("couldn't grab the frame")
-        break
+    if not success:
+      print("couldn't grab the frame")
+      break
 
-      cv2.imshow('Register', img)
+    cv2.imshow('Register', img)
 
-      pressedKey = cv2.waitKey(1)
+    pressedKey = cv2.waitKey(1)
 
-      if pressedKey == ord(' '):
-        img_name = f'{personName}.jpg'
+    if pressedKey == ord(' '):
+      img_name = f'{personName}.jpg'
     
-        cv2.imwrite(f'./processing/resources/img/attendance/{img_name}', img)
+      cv2.imwrite(f'./processing/resources/img/attendance/{img_name}', img)
 
-        print('photo saved')
+      print('photo saved')
 
-        break
+      break
 
-      elif pressedKey == ord('q'):
-        break
+    elif pressedKey == ord('q'):
+      break
