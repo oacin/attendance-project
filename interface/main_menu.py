@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from subprocess import call
+from subprocess import call 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -64,6 +64,8 @@ class Ui_MainWindow(object):
 
         self.registerPerson.clicked.connect(self.callRegisterPerson)
 
+        self.startAttendance.clicked.connect(self.callStartAttendance)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -72,7 +74,11 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Attendance Project"))
         
     def callRegisterPerson(self):
-        call(["python", "./processing/register.py"])
+        call(["python", "./interface/register_menu.py"])
+        
+
+    def callStartAttendance(self):
+        call(["python", "./processing/attendance.py"])
 
 import Resources_rc
 
