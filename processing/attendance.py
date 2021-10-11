@@ -4,7 +4,7 @@ import face_recognition
 import os
 from datetime import datetime
 
-known_faces = 'resources/img/attendance'
+known_faces = './processing/resources/img/attendance'
 
 images      = []
 classNames  = []
@@ -32,7 +32,7 @@ def findEncodings(images):
   return encodeList
 
 def markAttendance(name):
-  file_path = 'resources/src/attendance.csv'
+  file_path = './processing/resources/src/attendance.csv'
 
   with open(file_path, 'r+') as f:
     data  = f.readlines()
