@@ -60,6 +60,8 @@ class Ui_MainWindow(object):
 
         self.buttonConfirm.clicked.connect(self.callRegisterPerson)
 
+        self.buttonCancel.clicked.connect(self.cancelButton)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -69,6 +71,11 @@ class Ui_MainWindow(object):
 
     def callRegisterPerson(self):
         register.registrar(self.namePerson.text())
+
+        sys.exit(app.exec_())
+
+    def cancelButton(self):
+        sys.exit(app.exec_())
 
 import Resources_rc
 
