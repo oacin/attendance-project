@@ -8,6 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import sys
+
+sys.path.insert(1, './processing')
+
+import register
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -52,12 +58,17 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.buttonConfirm.clicked.connect(self.callRegisterPerson)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Attendance Project"))
+
+    def callRegisterPerson(self):
+        register.registrar(self.namePerson.text())
 
 import Resources_rc
 
