@@ -19,7 +19,7 @@ if personName:
     if pressedKey == ord(' '):
       img_name = f'{personName}.jpg'
   
-      cv2.imwrite(f'resources/img/attendance/{img_name}', img)
+      cv2.imwrite(f'./processing/resources/img/attendance/{img_name}', img)
 
       print('photo saved')
 
