@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tela_inicial.ui'
+# Form implementation generated from reading ui file 'tela_inicialV2.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -13,7 +13,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
-        MainWindow.resize(490, 393)
+        MainWindow.resize(442, 399)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("background-color: rgb(0, 0, 0);")
         MainWindow.setIconSize(QtCore.QSize(20, 20))
@@ -23,39 +23,63 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.backgroundAttendance = QtWidgets.QFrame(self.centralwidget)
-        self.backgroundAttendance.setMaximumSize(QtCore.QSize(425, 400))
-        self.backgroundAttendance.setStyleSheet("image: url(:/Imagens/images/fundo ofc.png);")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.backgroundAttendance.sizePolicy().hasHeightForWidth())
+        self.backgroundAttendance.setSizePolicy(sizePolicy)
+        self.backgroundAttendance.setMaximumSize(QtCore.QSize(1920, 1080))
+        self.backgroundAttendance.setStyleSheet("#Teste{\n"
+"image: url(:/Imagens/images/fundo ofc.png);\n"
+"}")
         self.backgroundAttendance.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.backgroundAttendance.setFrameShadow(QtWidgets.QFrame.Raised)
         self.backgroundAttendance.setObjectName("backgroundAttendance")
+        self.gridLayout = QtWidgets.QGridLayout(self.backgroundAttendance)
+        self.gridLayout.setObjectName("gridLayout")
         self.startAttendance = QtWidgets.QPushButton(self.backgroundAttendance)
-        self.startAttendance.setGeometry(QtCore.QRect(150, 200, 191, 71))
         self.startAttendance.setMinimumSize(QtCore.QSize(171, 0))
         self.startAttendance.setMaximumSize(QtCore.QSize(365, 300))
         self.startAttendance.setStyleSheet("image: url(:/Buttons/images/btnIniciarChamada.png);\n"
 "background-position: center;")
         self.startAttendance.setText("")
         self.startAttendance.setObjectName("startAttendance")
+        self.gridLayout.addWidget(self.startAttendance, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.registerPerson = QtWidgets.QPushButton(self.backgroundAttendance)
-        self.registerPerson.setGeometry(QtCore.QRect(140, 270, 201, 111))
         self.registerPerson.setMinimumSize(QtCore.QSize(171, 0))
         self.registerPerson.setMaximumSize(QtCore.QSize(365, 300))
         self.registerPerson.setStyleSheet("image: url(:/Buttons/images/btnRegistrarPessoa.png);\n"
 "background-position: center;")
         self.registerPerson.setText("")
         self.registerPerson.setObjectName("registerPerson")
+        self.gridLayout.addWidget(self.registerPerson, 3, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.attendanceList = QtWidgets.QPushButton(self.backgroundAttendance)
-        self.attendanceList.setGeometry(QtCore.QRect(140, 100, 201, 91))
-        self.attendanceList.setMinimumSize(QtCore.QSize(0, 0))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.attendanceList.sizePolicy().hasHeightForWidth())
+        self.attendanceList.setSizePolicy(sizePolicy)
+        self.attendanceList.setMinimumSize(QtCore.QSize(171, 0))
         self.attendanceList.setMaximumSize(QtCore.QSize(365, 300))
         self.attendanceList.setStyleSheet("image: url(:/Buttons/images/btnListaChamada.png);\n"
 "background-position: center;")
         self.attendanceList.setText("")
         self.attendanceList.setObjectName("attendanceList")
+        self.gridLayout.addWidget(self.attendanceList, 1, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.frame = QtWidgets.QFrame(self.backgroundAttendance)
+        self.frame.setStyleSheet("image: url(:/Imagens/images/attendance project.png);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
+        self.attendanceList.raise_()
+        self.startAttendance.raise_()
+        self.registerPerson.raise_()
+        self.frame.raise_()
         self.horizontalLayout.addWidget(self.backgroundAttendance)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 490, 18))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 442, 18))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -72,7 +96,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Attendance Project"))
-        
+
     def callRegisterPerson(self):
         call(["python", "./interface/register_menu.py"])
         
