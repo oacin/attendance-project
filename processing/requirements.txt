@@ -3,3 +3,4 @@ cmake
 face_recognition
 opencv-python
 numpy
+PyQt5
