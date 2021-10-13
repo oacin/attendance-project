@@ -13,7 +13,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
-        MainWindow.resize(442, 399)
+        MainWindow.resize(800, 600)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("background-color: rgb(0, 0, 0);")
         MainWindow.setIconSize(QtCore.QSize(20, 20))
@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout(self.backgroundAttendance)
         self.gridLayout.setObjectName("gridLayout")
         self.startAttendance = QtWidgets.QPushButton(self.backgroundAttendance)
-        self.startAttendance.setMinimumSize(QtCore.QSize(171, 0))
+        self.startAttendance.setMinimumSize(QtCore.QSize(365, 125))
         self.startAttendance.setMaximumSize(QtCore.QSize(365, 300))
         self.startAttendance.setStyleSheet("image: url(:/Buttons/images/btnIniciarChamada.png);\n"
 "background-position: center;")
@@ -46,7 +46,7 @@ class Ui_MainWindow(object):
         self.startAttendance.setObjectName("startAttendance")
         self.gridLayout.addWidget(self.startAttendance, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.registerPerson = QtWidgets.QPushButton(self.backgroundAttendance)
-        self.registerPerson.setMinimumSize(QtCore.QSize(171, 0))
+        self.registerPerson.setMinimumSize(QtCore.QSize(365, 125))
         self.registerPerson.setMaximumSize(QtCore.QSize(365, 300))
         self.registerPerson.setStyleSheet("image: url(:/Buttons/images/btnRegistrarPessoa.png);\n"
 "background-position: center;")
@@ -59,8 +59,8 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.attendanceList.sizePolicy().hasHeightForWidth())
         self.attendanceList.setSizePolicy(sizePolicy)
-        self.attendanceList.setMinimumSize(QtCore.QSize(171, 0))
-        self.attendanceList.setMaximumSize(QtCore.QSize(365, 300))
+        self.attendanceList.setMinimumSize(QtCore.QSize(365, 125))
+        self.attendanceList.setMaximumSize(QtCore.QSize(400, 300))
         self.attendanceList.setStyleSheet("image: url(:/Buttons/images/btnListaChamada.png);\n"
 "background-position: center;")
         self.attendanceList.setText("")
