@@ -27,6 +27,8 @@ def registrar(personName):
       facesdetectadas = classificador.detectMultiScale(imagemcinza,scaleFactor=1.1, minNeighbors=8,minSize=(30,30))
 
       if len(facesdetectadas) == 1:
+        nameRegistration = open(f'./processing/resources/src/nameRegistration.csv', 'a')
+        nameRegistration.write(personName + "\n")
         break
       elif len(facesdetectadas) > 1:
         print('Muitas pessoas')
