@@ -95,7 +95,11 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Attendance Project"))
 
     def callRegisterPerson(self):
-        register.registrar(self.namePerson.text())
+        if self.namePerson.text():
+            register.registrar(self.namePerson.text())
+        else:
+            #Mostrar mensagem de erro
+            return
 
         sys.exit(app.exec_())
 
