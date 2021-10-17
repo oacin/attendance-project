@@ -32,8 +32,6 @@ def registrar(personName):
       detectedfaces = classifier.detectMultiScale(grayimage,scaleFactor=1.1, minNeighbors=8,minSize=(30,30))
 
       if len(detectedfaces) == 1:
-        nameRegistration = open(f'./processing/resources/src/nameRegistration.csv', 'a')
-        nameRegistration.write(personName + "\n")
         break
       elif len(detectedfaces) > 1:
         msg.setText("Existem muitas pessoas na imagem.")
