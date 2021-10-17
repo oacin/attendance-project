@@ -8,6 +8,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from PyQt5.QtWidgets import QMessageBox
+
 import sys
 
 sys.path.insert(1, './processing')
@@ -98,7 +100,12 @@ class Ui_MainWindow(object):
         if self.namePerson.text():
             register.registrar(self.namePerson.text())
         else:
-            #Mostrar mensagem de erro
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Preencha o nome da pessoa que deseja registrar")
+            msg.setInformativeText('É necessário digitar o nome completo da pessoa para que consiga registra-la.')
+            msg.setWindowTitle("Campo não preenchido")
+            msg.exec_()
             return
 
         sys.exit(app.exec_())
