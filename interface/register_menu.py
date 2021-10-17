@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
 import sys
+import os
 
 sys.path.insert(1, './processing')
 
@@ -96,9 +97,27 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Attendance Project"))
 
+    def existingName(self, name):
+        fileNameFormated = f'{name}.jpg'
+        filename = f'./processing/resources/img/attendance/{fileNameFormated}'
+
+        return os.path.isfile(filename)
+
     def callRegisterPerson(self):
+        existingName = self.existingName(self.namePerson.text())
+
         if self.namePerson.text():
-            register.registrar(self.namePerson.text())
+            if existingName:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Nome da pessoa ja cadastrado.")
+                msg.setInformativeText('O nome que você está tentando cadastrar já foi cadastrado anteriormente.')
+                msg.setWindowTitle("Nome já cadastrado")
+                msg.exec_()
+                return
+            
+            else:
+                register.registrar(self.namePerson.text())
         else:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
