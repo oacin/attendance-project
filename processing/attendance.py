@@ -2,7 +2,15 @@ import cv2
 import numpy as np
 import face_recognition
 import os
+import requests
 from datetime import datetime
+
+url = "http://localhost:8081/attendances"
+
+headers = {
+  'Content-type':'application/json',
+  'Accept':'application/json'
+}
 
 known_faces = './processing/resources/img/attendance'
 
@@ -37,18 +45,52 @@ def markAttendance(name):
   with open(file_path, 'r+') as f:
     data  = f.readlines()
 
+    # cleaning
+    data = data[1:]
+    for i in range(len(data)):
+      data[i] = data[i].rstrip('\n')
+
     appointedDays = []
 
     for line in data:
-      entry = line.split(',')
+      cols = line.split(',')
 
-      if entry[0] == name:
-        appointedDays.append(entry[1].rstrip('\n'))
+      if cols[0] == name:
+        appointedDays.append(cols[1].split('T')[0])
 
-    today = datetime.now().strftime('%m/%d/%Y')
+    today = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
-    if today not in appointedDays:
+    if today.split('T')[0] not in appointedDays:
       f.writelines(f'\n{name},{today}')
+      f.close()
+
+      with open(file_path, 'r+') as f:
+        data = f.readlines()
+        
+        # cleaning
+        data = data[1:]
+        for i in range(len(data)):
+          data[i] = data[i].rstrip('\n')
+
+        payload = []
+
+        for entry in data:
+          cols = entry.split(',')
+
+          register = {
+            "name": cols[0],
+            "date": cols[1]
+          }
+
+          payload.append(register)
+
+        r = requests.post(
+          url = url,
+          json = payload,
+          headers = headers
+        )
+
+        print(f'{r.status_code}')
 
 encodeListKnown = findEncodings(images)
 
