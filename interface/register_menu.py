@@ -103,18 +103,28 @@ class Ui_MainWindow(object):
 
         return os.path.isfile(filename)
 
+    def yesOrNo(self, i):
+        if i.text() == '&Yes':
+            register.registrar(self.namePerson.text())
+            sys.exit(app.exec_())
+            
+        else:
+            return
+
     def callRegisterPerson(self):
         existingName = self.existingName(self.namePerson.text())
 
         if self.namePerson.text():
             if existingName:
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("Nome da pessoa ja cadastrado.")
-                msg.setInformativeText('O nome que você está tentando cadastrar já foi cadastrado anteriormente.')
+                msg.setIcon(QMessageBox.Warning)
                 msg.setWindowTitle("Nome já cadastrado")
+                msg.setText("Nome da pessoa ja cadastrado.")
+                msg.setInformativeText('O nome que você está tentando cadastrar já foi cadastrado anteriormente, deseja substituir o registro?')
+                simounao = msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+                msg.buttonClicked.connect(self.yesOrNo)
                 msg.exec_()
-                return
+                return              
             
             else:
                 register.registrar(self.namePerson.text())
