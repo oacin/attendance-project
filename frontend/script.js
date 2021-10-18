@@ -5,10 +5,29 @@ let headers = {
   mode: 'no-cors'
 };
 
-let attendanceList = [];
+window.onload = async () => {
+  const res = await fetch(url);
+  const data = await res.json();
 
-function load() {
-  fetch(url)
-  .then(res => res.json())
-  .then(res => attendanceList = res);
-};
+  let table = document.getElementById('attendances');
+
+  data.forEach(row => {
+    let newRow = table.insertRow();
+
+    let newCell = newRow.insertCell();
+    let nameTextNode = document.createTextNode(row['name']);
+    newCell.appendChild(nameTextNode);
+
+    let datetime = row['date'];
+    let date = datetime.split('T')[0]
+    let time = datetime.split('T')[1].split('.')[0]
+    
+    newCell = newRow.insertCell();
+    let dateTextNode = document.createTextNode(date);
+    newCell.appendChild(dateTextNode);
+
+    newCell = newRow.insertCell();
+    let timeTextNode = document.createTextNode(time);
+    newCell.appendChild(timeTextNode);
+  });
+}
