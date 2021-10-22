@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'tela_inicialV2.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from subprocess import call 
+import webbrowser
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -90,6 +83,8 @@ class Ui_MainWindow(object):
 
         self.startAttendance.clicked.connect(self.callStartAttendance)
 
+        self.attendanceList.clicked.connect(self.open_webbrowser)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -104,6 +99,9 @@ class Ui_MainWindow(object):
     def callStartAttendance(self):
         call(["python", "./processing/attendance.py"])
 
+    def open_webbrowser(self):
+        webbrowser.open('http://127.0.0.1:5500/frontend/index.html')
+
 import Resources_rc
 
 if __name__ == "__main__":
@@ -112,6 +110,6 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    MainWindow.show()
+    MainWindow.showMaximized()
     sys.exit(app.exec_())
 
