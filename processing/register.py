@@ -6,7 +6,7 @@ def registrar(personName):
   msg = QMessageBox()
   msg.setIcon(QMessageBox.Critical)
 
-  classifier = cv2.CascadeClassifier('./processing/haarcascade_frontalface_default.xml')
+  classifier = cv2.CascadeClassifier('./processing/resources/src/haarcascade_frontalface_default.xml')
 
   cap = cv2.VideoCapture(0)
 
