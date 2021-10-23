@@ -32,6 +32,11 @@ def registrar(personName):
       detectedfaces = classifier.detectMultiScale(grayimage,scaleFactor=1.1, minNeighbors=8,minSize=(30,30))
 
       if len(detectedfaces) == 1:
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Imagem Registrada.")
+        msg.setInformativeText(f'O cadastro com nome {personName} foi realizado com sucesso!')
+        msg.setWindowTitle("Cadastro confirmado")
+        msg.exec_()
         break
       elif len(detectedfaces) > 1:
         msg.setText("Existem muitas pessoas na imagem.")
