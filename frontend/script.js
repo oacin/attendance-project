@@ -9,19 +9,20 @@ window.onload = async () => {
   const res = await fetch(url);
   const data = await res.json();
 
-  let table = document.getElementById('attendances');
+  let tableBody = document.getElementById('attendances').getElementsByTagName('tbody')[0];
 
   data.forEach(row => {
-    let newRow = table.insertRow();
+    let newRow = tableBody.insertRow();
+
+    let name = capitalizeName(row['name'].toLowerCase());
+    let datetime = row['date'];
+    let date = datetime.split('T')[0];
+    let time = datetime.split('T')[1].split('.')[0];
 
     let newCell = newRow.insertCell();
-    let nameTextNode = document.createTextNode(row['name']);
+    let nameTextNode = document.createTextNode(name);
     newCell.appendChild(nameTextNode);
 
-    let datetime = row['date'];
-    let date = datetime.split('T')[0]
-    let time = datetime.split('T')[1].split('.')[0]
-    
     newCell = newRow.insertCell();
     let dateTextNode = document.createTextNode(date);
     newCell.appendChild(dateTextNode);
@@ -30,4 +31,18 @@ window.onload = async () => {
     let timeTextNode = document.createTextNode(time);
     newCell.appendChild(timeTextNode);
   });
-}
+
+  $('#attendances').DataTable();
+};
+
+function capitalizeName(name) {
+  const nameArr = name.split(' ');
+
+  for (var i = 0; i < nameArr.length; i++) {
+    nameArr[i] = nameArr[i].charAt(0).toUpperCase() + nameArr[i].slice(1);
+  }
+
+  const capitalizedName = nameArr.join(' ');
+
+  return capitalizedName;
+};
