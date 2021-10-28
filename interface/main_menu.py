@@ -100,7 +100,7 @@ class Ui_MainWindow(object):
         call(["python", "./processing/attendance.py"])
 
     def open_webbrowser(self):
-        webbrowser.open('http://127.0.0.1:5500/frontend/index.html')
+        webbrowser.open('http://127.0.0.1:8085/frontend/index.html')
 
 import Resources_rc
 
