@@ -14,7 +14,11 @@ def registrar(personName):
     success, img = cap.read()
 
     if not success:
-      print("couldn't grab the frame")
+      msg.setIcon(QMessageBox.Critical)
+      msg.setText("Camera não encontrada.")
+      msg.setInformativeText(f'O cadastro não foi possível pois não tem uma camera conectada!')
+      msg.setWindowTitle("Camera não encontrada!")
+      msg.exec_()
       break
 
     cv2.imshow('Register', img)

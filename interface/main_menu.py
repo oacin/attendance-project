@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from subprocess import call 
 import webbrowser
+from PyQt5.QtWidgets import QMessageBox
+import cv2
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -97,7 +99,19 @@ class Ui_MainWindow(object):
         
 
     def callStartAttendance(self):
-        call(["python", "./processing/attendance.py"])
+        cap = cv2.VideoCapture(0)
+        success, img = cap.read()
+
+        if not success:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Camera não encontrada.")
+            msg.setInformativeText(f'O cadastro não foi possível pois não tem uma camera conectada!')
+            msg.setWindowTitle("Camera não encontrada!")
+            msg.exec_()
+
+        else:
+            call(["python", "./processing/attendance.py"])
 
     def open_webbrowser(self):
         webbrowser.open('http://127.0.0.1:8085/frontend/index.html')
