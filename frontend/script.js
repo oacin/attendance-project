@@ -1,4 +1,4 @@
-let url = "http://localhost:8081/attendances";
+let url = "http://localhost:8081/attendance";
 let headers = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
@@ -9,13 +9,15 @@ window.onload = async () => {
   const res = await fetch(url);
   const data = await res.json();
 
+  const attendanceList = data['object'];
+
   let tableBody = document.getElementById('attendances').getElementsByTagName('tbody')[0];
 
-  data.forEach(row => {
+  attendanceList.forEach(row => {
     let newRow = tableBody.insertRow();
 
     let name = capitalizeName(row['name'].toLowerCase());
-    let datetime = row['date'];
+    let datetime = row['datetime'];
     let date = datetime.split('T')[0];
     let time = datetime.split('T')[1].split('.')[0];
 
