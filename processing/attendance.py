@@ -5,11 +5,11 @@ import os
 import requests
 from datetime import datetime
 
-url = "http://localhost:8081/attendances"
+url = "http://localhost:8081/attendance"
 
 headers = {
-  'Content-type':'application/json',
-  'Accept':'application/json'
+  'Accept':'application/json',
+  'Content-type':'application/json'
 }
 
 known_faces = './processing/resources/img/attendance'
@@ -18,9 +18,6 @@ images      = []
 classNames  = []
 
 knownFacesList = os.listdir(known_faces)
-
-# prints all known faces at the start
-# print(knownFacesList)
 
 for knownFace in knownFacesList:
   currImg = cv2.imread(f'{known_faces}/{knownFace}')
@@ -40,57 +37,28 @@ def findEncodings(images):
   return encodeList
 
 def markAttendance(name):
-  file_path = './processing/resources/src/attendance.csv'
+  today = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
-  with open(file_path, 'r+') as f:
-    data  = f.readlines()
+  r = requests.get(url = url)
+  data = r.json()
+  attendanceList = data['object']
 
-    # cleaning
-    data = data[1:]
-    for i in range(len(data)):
-      data[i] = data[i].rstrip('\n')
+  appointedDays = []
 
-    appointedDays = []
+  for attendance in attendanceList:
+    if name == attendance['name']:
+      appointedDays.append(attendance['datetime'].split('T')[0])
+  
+  if today.split('T')[0] not in appointedDays:
+    payload = {'name': name, 'datetime': today}
 
-    for line in data:
-      cols = line.split(',')
+    r = requests.post(
+      url = url,
+      json = payload,
+      headers = headers
+    )
 
-      if cols[0] == name:
-        appointedDays.append(cols[1].split('T')[0])
-
-    today = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-
-    if today.split('T')[0] not in appointedDays:
-      f.writelines(f'\n{name},{today}')
-      f.close()
-
-      with open(file_path, 'r+') as f:
-        data = f.readlines()
-        
-        # cleaning
-        data = data[1:]
-        for i in range(len(data)):
-          data[i] = data[i].rstrip('\n')
-
-        payload = []
-
-        for entry in data:
-          cols = entry.split(',')
-
-          register = {
-            "name": cols[0],
-            "date": cols[1]
-          }
-
-          payload.append(register)
-
-        r = requests.post(
-          url = url,
-          json = payload,
-          headers = headers
-        )
-
-        print(f'{r.status_code}')
+    print(f'New attendance log status: {r.status_code}')
 
 encodeListKnown = findEncodings(images)
 
@@ -116,7 +84,7 @@ while True:
   encodesCurrFrame  = face_recognition.face_encodings(optimized_img, facesCurrFrame)
 
   for encodeFace, faceLoc in zip(encodesCurrFrame, facesCurrFrame):
-    matches     = face_recognition.compare_faces(encodeListKnown, encodeFace)
+    matches     = face_recognition.compare_faces(encodeListKnown, encodeFace, tolerance=0.35)
     faceDist    = face_recognition.face_distance(encodeListKnown, encodeFace)
 
     # prints the array with the distances between each 'known face' and the frame that is currently being processed
@@ -161,7 +129,7 @@ while True:
       
       markAttendance(name)
 
-  cv2.imshow('Webcam', img)
+  cv2.imshow('Class Check-in', img)
   
   if cv2.waitKey(1) == ord('q'):
     break

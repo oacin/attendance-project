@@ -1,2 +1,3 @@
-./interface/__pycache__
+*/__pycache__
+*.jpg
 database.mv.db

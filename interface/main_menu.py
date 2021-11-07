@@ -100,16 +100,14 @@ class Ui_MainWindow(object):
 
     def callStartAttendance(self):
         cap = cv2.VideoCapture(0)
-        success, img = cap.read()
 
-        if not success:
+        if cap is None or not cap.isOpened():
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Camera não encontrada.")
             msg.setInformativeText(f'O cadastro não foi possível pois não tem uma camera conectada!')
             msg.setWindowTitle("Camera não encontrada!")
             msg.exec_()
-
         else:
             call(["python", "./processing/attendance.py"])
 
@@ -126,4 +124,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.showMaximized()
     sys.exit(app.exec_())
-
