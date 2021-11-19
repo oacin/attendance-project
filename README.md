@@ -16,6 +16,9 @@ Attendance System
 - Java
 
 # Como 'levantar' a aplicacao 
+0.  - Instalar [VSCode](https://code.visualstudio.com/download)
+    - Instalar extensao *Live Server*
+      - Nas configuracoes do vscode, `settings.json`, adicionar a seguinte linha para configurar a porta do Live Server: `"liveServer.settings.port": 8085`
 1. Instalar [git](https://git-scm.com/downloads)
 2.  - Instalar [Java JRE/JDK](https://www.oracle.com/java/technologies/downloads/)
     - Adicionar `JAVA_HOME` as variaveis de ambiente
@@ -34,13 +37,13 @@ Attendance System
         - Abra a pasta extraida e novamente abra essa nova pasta no terminal
         - No terminal execute:
             - `pip install dlib-19.19.0-cp37-cp37m-win_amd64.whl` **OU** `pip install dlib-19.19.0-cp38-cp38-win_amd64.whl` de acordo com seu sistema operacional
-            - Com o dlib instalado, execute novamente agora a instalacao do face_recognition: `pip install face_recognition`
+            - Com o dlib instalado, execute novamente agora a instalacao do face_recognition: `pip install face_recognition==1.3.0`
     - ***Linux***:
         - Abra o terminal e execute nesta ordem:
             - `sudo apt-get install cmake`
-            - `sudo pip3 install dlib`
-            - `sudo pip3 install face_recognition`
-7.  - A partir desse momento basta executar a partir da raiz do projeto: `` e utilizar o app.
+            - `sudo pip3 install dlib==19.19.0`
+            - `sudo pip3 install face_recognition==1.3.0`
+7.  - A partir desse momento basta executar a partir da raiz do projeto: `python interface/main_menu.py` e utilizar o app.
     - No Linux pode ser que o PyQt5 nao funcione pela instalacao do pip, instale novamente utilizando o apt-get com o comando `sudo apt-get install python3-pyqt5`
 
 # Como utilizar o app
